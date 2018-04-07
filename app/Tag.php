@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tag extends Model
 {
-        protected $fillable = ['name', 'slug', 'excerpt', 'body', 'status', 'file',];
+        protected $fillable = ['name', 'slug',];
 
         public function Post()
         {
