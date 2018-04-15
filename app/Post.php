@@ -2,28 +2,24 @@
 
 namespace App;
 
-use App\Category;
-use App\Tag;
-use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-        protected $fillable = ['name', 'slug', 'excerpt', 'body', 'status', 'file',];
+        protected $fillable = ['user_id', 'category_id', 'name', 'slug', 'excerpt', 'body', 'status', 'file',];
 
         public function user()
         {
-        		return $this->belongTo('User');
+        	       return $this->belongsTo('App\User');
         }
         
         public function category()
         {
-        		return $this->belongTo('Category');
+        	       return $this->belongsTo('App\Category');
         }
 
         public function tags()
         {
-        	return $this->belongsToMany('Tag');
-		}
-
+                         return $this->belongsToMany('App\Tag');
+        }
 }
