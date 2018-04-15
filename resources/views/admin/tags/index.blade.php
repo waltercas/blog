@@ -9,7 +9,7 @@
 				<div class="panel-heading">
 					Lista de etiquetas
 					<a href="{{ route('tags.create') }}" 
-					class="btn btn-primary pull-right centrarb">
+					class="btn btn-sm btn-primary pull-right centrarb">
 						Crear
 					</a>
 				</div>
@@ -41,7 +41,12 @@
 									</a>
 								</td>
 								<td width="10px">
-									Eliminar
+									{!! Form::open(['route' => ['tags.destroy', $tag->id],
+									'method'=> 'DELETE']) !!}
+										<button class="btn btn-sm btn-danger">
+											Eliminar
+										</button>
+									{!! Form::close() !!}
 								</td>
 							@endforeach
 						</tbody>

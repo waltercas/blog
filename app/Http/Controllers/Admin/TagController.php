@@ -34,14 +34,14 @@ class TagController extends Controller
             ->with('info', 'Etiqueta creada con exito');
     }
 
-    public function show(Tag $tag)
+    public function show($id)
     {
         $tag = Tag::find($id);
 
         return view('admin.tags.show', compact('tag'));
     }
 
-    public function edit(Tag $tag)
+    public function edit($id)
     {
         $tag = Tag::find($id);
 
@@ -59,9 +59,9 @@ class TagController extends Controller
 
     }
 
-    public function destroy(Tag $tag)
+    public function destroy($id)
     {
-        $tag::find($id)->delete();
+        $tag = Tag::find($id)->delete();
         return back()->with('info', 'Eliminado correctamente');
     }
 }

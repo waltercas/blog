@@ -15,7 +15,10 @@
     <style>
 
        .centrarb {
-                 padding: 2px;
+                 
+                padding-top: 0.5px;
+                padding-bottom: 1px;
+                
                 }
 
 </style>
