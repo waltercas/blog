@@ -24,8 +24,9 @@ class TagUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>'required'
-            'slug'=>'required|unique:tags,slug,' . $this->tag,
+            'name' => 'required',
+            'slug' => 'required|unique:tags,slug,' . $this->tag,
+
         ];
     }
 }

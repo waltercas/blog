@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Http\Requests\TagStoreRequest;
 use App\Http\Requests\TagUpdateRequest;
+
+use App\Http\Controllers\Controller;
+
 use App\Tag;
-use Illuminate\Http\Request;
 
 class TagController extends Controller
 {
@@ -26,12 +28,22 @@ class TagController extends Controller
         return view('admin.tags.create');  
     }
 
+ /**   public function store(Request $request)
+    {
+        $this->validate($request, [
+            'name'=>'required',
+            'slug'=>'required|unique:tags,slug',
+        ]);
+        $tag = Tag::create($request->all());
+
+        return redirect()->route('tags.edit', $tag->id)->with('info', 'Etiqueta creada con éxito');
+    }*/        
+
     public function store(TagStoreRequest $request)
     {
-        $tag = Tag::create($Request->all());
+         $tag = Tag::create($request->all());
 
-        return redirect()->route('tags.edit', $tag->id)
-            ->with('info', 'Etiqueta creada con exito');
+        return redirect()->route('tags.edit', $tag->id)->with('info', 'Etiqueta creada con éxito');
     }
 
     public function show($id)
@@ -48,7 +60,7 @@ class TagController extends Controller
         return view('admin.tags.edit', compact('tag'));
     }
 
-    public function update(TagUpdateRequest $request, Tag $tag)
+    public function update(TagUpdateRequest $request, $id)
     {
         $tag = Tag::find($id);
  
