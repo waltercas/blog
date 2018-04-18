@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Category;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PostStoreRequest;
 use App\Http\Requests\PostUpdateRequest;
+
+use Illuminate\Support\Facades\Storage;
+
+use App\Category;
 use App\Post;
 use App\Tag;
 use Illuminate\Http\Request;
@@ -35,9 +38,18 @@ class PostController extends Controller
 
     public function store(PostStoreRequest $request)
     {
-         $post = Post::create($request->all());
+       $post = Post::create($request->all());
 
-        return redirect()->route('posts.edit', $post->id)->with('info', 'Post creada con éxito');
+        //IMAGE 
+        if($request->file('file')){
+            $path = Storage::disk('public')->put('image',  $request->file('file'));
+            $post->fill(['file' => asset($path)])->save();
+        }
+
+        //TAGS
+        $post->tags()->attach($request->get('tags'));
+
+        return redirect()->route('posts.edit', $post->id)->with('info', 'Entrada creada con éxito');
     }
 
     public function show($id)
@@ -58,14 +70,22 @@ class PostController extends Controller
     }
 
     public function update(PostUpdateRequest $request, $id)
-    {
+        {
         $post = Post::find($id);
- 
+        
+
         $post->fill($request->all())->save();
 
-        return redirect()->route('posts.edit', $post->id)
-            ->with('info', 'Post actualizada con exito');
+        //IMAGE 
+        if($request->file('file')){
+            $path = Storage::disk('public')->put('image',  $request->file('file'));
+            $post->fill(['file' => asset($path)])->save();
+        }
 
+        //TAGS
+        $post->tags()->sync($request->get('tags'));
+
+        return redirect()->route('posts.edit', $post->id)->with('info', 'Entrada actualizada con éxito');
     }
 
     public function destroy($id)

@@ -11,14 +11,13 @@
 				</div>
 			
 
-				<div class="panel-body">
-					{!! Form::model($post, ['route' => ['posts.update', $post->id], 
-					'method' => 'PUT']) !!}
-			
-						@include('admin.posts.partials.form')
+                <div class="panel-body">
+                    {!! Form::model($post, ['route' => ['posts.update', $post->id], 'method' => 'PUT', 'files' => true]) !!}
+                        
+                        @include('admin.posts.partials.form')
 
-					{!! Form::close() !!}
-				</div>
+                    {!! Form::close() !!}
+                </div>
 			</div>
 		</div>
 	</div>
@@ -27,3 +26,4 @@
 
 
 @endsection
+
