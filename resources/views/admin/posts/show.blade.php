@@ -16,7 +16,7 @@
 					<hr>
 					<p><strong>Slug:</strong>		{{ $post->slug }}</p>
 					<hr>
-					<p><strong>Contenido:</strong>	{{ $post->body }}</p>
+					<p><strong>Contenido:</strong>	{!! $post->body !!} </p>
 				</div>
 			</div>
 		</div>
